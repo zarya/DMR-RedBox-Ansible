@@ -1,0 +1,9 @@
+---
+- name: stop snmpd
+  action: service name=snmpd state=stopped enabled=yes
+
+- name: restart snmpd
+  action: service name=snmpd state=restarted enabled=yes
+
+- name: start snmpd
+  action: service name=snmpd state=started enabled=yes

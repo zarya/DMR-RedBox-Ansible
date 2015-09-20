@@ -1,0 +1,26 @@
+---
+- hostname: name={{ hostname }}
+
+- name: Update apt database 
+  action: apt update_cache=yes
+  tags: apt
+
+- name: Upgrade packages
+  action: apt upgrade=full
+  tags: apt
+
+- name: Install common packages 
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - vim
+    - sudo
+    - ntp
+  tags: common 
+
+- name: MOTD
+  action: template src=motd.j2 dest=/etc/motd
+  tags:
+    - motd_config
+
+- name: Interfaces
+  action: template src=interfaces dest=/etc/network/interfaces

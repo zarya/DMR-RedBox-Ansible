@@ -1,0 +1,4 @@
+hostname: repeater 
+tunnel_ip: 10.0.0.1
+sys_location: Arnhem
+repeater_gateway: 10.0.1.1

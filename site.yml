@@ -1,0 +1,16 @@
+---
+- hosts: all
+  tasks:
+  - name: Read configuration 
+    include_vars: "{{ config_file }}"
+    tags:
+      - always
+
+
+- name: Install Hytera vpn gateway 
+  hosts: hytera-vpn-doos
+  user: root
+  roles:
+    - common
+    - openvpn
+    - snmpd

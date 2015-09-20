@@ -1,0 +1,26 @@
+---
+
+- name: Install common packages 
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - openvpn 
+  tags: openvpn 
+
+- name: Creates directory
+  file: path=/etc/openvpn/keys state=directory owner=root group=root mode=0700
+
+- name: openvpn configs
+  action: template src={{ item }} dest=/etc/openvpn/{{ item }} mode=0600 owner=root 
+  with_items:
+    - nl-master.conf
+    - keys/nl-master.crt
+    - keys/nl-master.tls
+
+- name: sysctl.conf
+  action: template src=sysctl.conf dest=/etc/sysctl.conf
+
+- name: openvpn tunnel upscript
+  action: template src=nl-master.up dest=/etc/openvpn/nl-master.up mode=0700 owner=root
+
+- name: openvpn init defaults
+  action: template src=openvpn-defaults dest=/etc/default/openvpn

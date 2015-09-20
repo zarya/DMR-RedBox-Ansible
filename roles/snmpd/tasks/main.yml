@@ -1,0 +1,11 @@
+---
+- name: Install snmp packages 
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - snmpd
+
+- name: snmpd.conf
+  action: template src=snmpd.conf dest=/etc/snmp/snmpd.conf
+
+- name: restart snmpd
+  action: service name=snmpd state=restarted enabled=yes
