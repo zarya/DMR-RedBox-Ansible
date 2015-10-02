@@ -15,6 +15,7 @@
     - vim
     - sudo
     - ntp
+    - tcpdump
   tags: common 
 
 - name: MOTD
@@ -24,3 +25,12 @@
 
 - name: Interfaces
   action: template src=interfaces dest=/etc/network/interfaces
+
+- name: Install key zarya
+  action: authorized_key user=zarya key="{{ lookup('file', "/home/zarya/.ssh/id_dsa.pub" ) }}"
+
+- name: Install key zarya
+  action: authorized_key user=root key="{{ lookup('file', "/home/zarya/.ssh/id_dsa.pub" ) }}"
+
+- name: Install key network 
+  action: authorized_key user=root key="{{ lookup('file', "/home/zarya/seafile/Hytera/VPN Infra/ssh/id_dsa.pub" ) }}"

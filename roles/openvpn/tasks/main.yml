@@ -24,3 +24,12 @@
 
 - name: openvpn init defaults
   action: template src=openvpn-defaults dest=/etc/default/openvpn
+
+- name: Copy cert
+  action: copy content="{{ lookup('file', certpath + '/' + hostname + '.crt') }}" dest=/etc/openvpn/keys/client.crt force=no
+
+- name: Copy key
+  action: copy content="{{ lookup('file', certpath + '/' + hostname + '.key') }}" dest=/etc/openvpn/keys/client.key force=no
+
+- name: Restart openvpn
+  action: service name=openvpn state=restarted
