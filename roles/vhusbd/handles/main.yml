@@ -1,0 +1,9 @@
+---
+- name: stop vhusbdpin
+  action: service name=vhusbdpin state=stopped enabled=yes
+
+- name: restart vhusbdpin
+  action: service name=vhusbdpin state=restarted enabled=yes
+
+- name: start vhusbdpin
+  action: service name=vhusbdpin state=started enabled=yes

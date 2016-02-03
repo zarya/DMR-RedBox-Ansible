@@ -1,0 +1,9 @@
+---
+- name: Download USB over ethernet 
+  action: get_url url=https://www.virtualhere.com/sites/default/files/usbserver/vhusbdi386 dest=/usr/sbin/vhusbdi386 mode=0755
+
+- name: init script 
+  action: template src=vhusbdpin dest=/etc/init.d/vhusbdpin mode=0755
+
+- name: restart vhusbd 
+  action: service name=vhusbdpin state=restarted enabled=yes runlevel=default
